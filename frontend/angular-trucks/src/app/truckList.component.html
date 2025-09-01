@@ -1,0 +1,56 @@
+<div class="truck-list">
+  <h2>Lista de Caminhões</h2>
+
+  <table mat-table [dataSource]="trucks" class="mat-elevation-z8">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let truck">{{ truck.id }}</td>
+    </ng-container>
+
+    <!-- Model Column -->
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef>Modelo</th>
+      <td mat-cell *matCellDef="let truck">{{ truck.model }}</td>
+    </ng-container>
+
+    <!-- Manufacure Year Column -->
+    <ng-container matColumnDef="manufactureYear">
+      <th mat-header-cell *matHeaderCellDef>Ano</th>
+      <td mat-cell *matCellDef="let truck">{{ truck.manufactureYear }}</td>
+    </ng-container>
+
+    <!-- Chassi Column -->
+    <ng-container matColumnDef="chassisId">
+      <th mat-header-cell *matHeaderCellDef>Chassi</th>
+      <td mat-cell *matCellDef="let truck">{{ truck.chassisId }}</td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef>Cor</th>
+      <td mat-cell *matCellDef="let truck">{{ truck.color }}</td>
+    </ng-container>
+
+    <!-- Plant Column -->
+    <ng-container matColumnDef="plant">
+      <th mat-header-cell *matHeaderCellDef>Planta</th>
+      <td mat-cell *matCellDef="let truck">{{ truck.plant }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let truck">
+        <button mat-button color="primary" (click)="editTruck(truck)">Editar</button>
+        <button mat-button color="warn" (click)="deleteTruck(truck.id!)">Excluir</button>
+        <!-- <button mat-button color="primary" (click)="changeColor(truck)">Alterar cor</button> -->
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

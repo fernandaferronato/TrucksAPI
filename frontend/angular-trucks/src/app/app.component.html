@@ -1,0 +1,79 @@
+<div class="container">
+  <h1 style="margin-bottom: 20px;" >Gerenciamento de Caminhões</h1>
+  <h2>Registro de Caminhões</h2>
+
+  <!-- Input Form for truck registration -->
+  <form #truckForm="ngForm" class="truck-form">
+
+    <!-- Model -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Modelo</mat-label>
+      <mat-select name="model" [(ngModel)]="newTruck.model" required #modelField="ngModel">
+        <mat-option [value]="null" disabled>Selecione o Modelo</mat-option>
+        <mat-option *ngFor="let model of truckModels" [value]="model">{{ model }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="modelField.invalid && modelField.touched">
+        Modelo é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Manufacure Year -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Ano de Fabricação</mat-label>
+      <input matInput type="number" name="manufactureYear" [(ngModel)]="newTruck.manufactureYear" required #yearField="ngModel"/>
+      <mat-error *ngIf="yearField.invalid && yearField.touched">
+        Ano é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Chassi -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Chassi</mat-label>
+      <input matInput name="chassisId" [(ngModel)]="newTruck.chassisId" required #chassiIdField="ngModel"/>
+      <mat-error *ngIf="chassiIdField.invalid && chassiIdField.touched">
+        Chassi é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Color -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Cor</mat-label>
+      <input matInput name="color" [(ngModel)]="newTruck.color" required #colorField="ngModel"/>
+      <mat-error *ngIf="chassiIdField.invalid && chassiIdField.touched">
+        Cor é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Plant -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Planta</mat-label>
+      <mat-select name="plant" [(ngModel)]="newTruck.plant" required #plantField="ngModel">
+        <mat-option [value]="null" disabled>Selecione a Planta</mat-option>
+        <mat-option *ngFor="let plant of truckPlant" [value]="plant">{{ plant }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="plantField.invalid && plantField.touched">
+        Planta é obrigatória
+      </mat-error>
+    </mat-form-field>
+    
+    <button mat-raised-button color="primary" (click)="addTruck(truckForm)" style="margin-left: 50px;">
+      Adicionar
+    </button>
+  </form>
+  
+  <!-- Find by chassi -->
+   <div style="margin-top: 20px;">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Buscar por chassi</mat-label>
+      <input matInput name="getByChassis" [(ngModel)]="searchChassis" />
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="searchTruckByChassis()" style="margin-left: 25px;"> Buscar</button>
+    <button mat-raised-button color="accent" (click)="clearSearch()" style="margin-left: 25px;">Limpar</button>
+  </div>
+  
+  <!-- Trucks List Component -->
+    <app-truck-list
+    [trucks]="(filteredTruck$ | async) ?? (trucks$ | async) ?? []"
+    (onDelete)="deleteTruck($event)">
+  </app-truck-list>
+</div>

@@ -1,0 +1,52 @@
+`
+    <h2 mat-dialog-title>Editar Caminhão</h2>
+    <div mat-dialog-content>
+      
+      <!-- Model -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Modelo</mat-label>
+        <mat-select name="model" [(ngModel)]="data.model" required #modelField="ngModel">
+        <mat-option [value]="null" disabled>Selecione o Modelo</mat-option>
+        <mat-option *ngFor="let model of truckModels" [value]="model">{{ model }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="modelField.invalid && modelField.touched">
+        Modelo é obrigatório
+      </mat-error>
+      </mat-form-field>
+
+      <!-- Manufacure Year -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Ano de Fabricação</mat-label>
+        <input matInput type="number" [(ngModel)]="data.manufactureYear" />
+      </mat-form-field>
+
+      <!-- Chassi -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Chassi</mat-label>
+        <input matInput [(ngModel)]="data.chassisId" />
+      </mat-form-field>
+
+      <!-- Color -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Cor</mat-label>
+        <input matInput [(ngModel)]="data.color" />
+      </mat-form-field>
+
+      <!-- Plant -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Planta</mat-label>
+        <mat-select name="plant" [(ngModel)]="data.plant" required #plantField="ngModel">
+        <mat-option [value]="null" disabled>Selecione a Planta</mat-option>
+        <mat-option *ngFor="let plant of truckPlant" [value]="plant">{{ plant }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="plantField.invalid && plantField.touched">
+        Planta é obrigatória
+      </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="onCancel()">Cancelar</button>
+      <button mat-button color="primary" (click)="onSave()">Salvar</button>
+    </div>
+  `
